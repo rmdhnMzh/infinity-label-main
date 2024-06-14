@@ -1,0 +1,504 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * 'unsafe-inline'; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; font-src * 'unsafe-inline' 'unsafe-eval' data:; connect-src * 'unsafe-inline'; frame-src *; media-src *;">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+
+    <title>Infinity Label</title>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="fontaswome/css/all.min.css">
+    <style>
+        .img-thumbnail.template-img:hover {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light sticky-top">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link navposition" data-widget="pushmenu" role="button">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navposition" role="button" type="button" data-toggle="modal"
+                        data-target="#new-project">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a class="brand-link">
+                <img src="..\adminlte\img\LOGO infinity label designer 300.png" alt="Etterlogo" class="brand-image"
+                    style="opacity: .8">
+                <span class="brand-text font-weight-light">Infinity Label</span>
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <li class="nav-item">
+                            <a data-toggle="modal" data-target="#new-project" href="#" class="nav-link">
+                                <i class="fa-solid fa-plus"></i>
+                                <p class="ml-3">
+                                    Create New
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <!-- Default box -->
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h3>Template</h3>
+                        </div>
+                    </div>
+                    <div class="card p-3">
+                        <div class="row row-cols-1">
+                            <div class="col-md-2">
+                                <div class="img-template">
+                                    <img src="adminlte/img/99.png" class="img-thumbnail template-img" alt=""
+                                        data-value="5x34" data-toggle="modal" data-target="#new-project-temp">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="img-template">
+                                    <img src="adminlte/img/100.png" class="img-thumbnail template-img" alt=""
+                                        data-value="34x100" data-toggle="modal" data-target="#new-project-temp">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="img-template">
+                                    <img src="adminlte/img/101.png" class="img-thumbnail template-img" alt=""
+                                        data-value="50x100" data-toggle="modal" data-target="#new-project-temp">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="img-template">
+                                    <img src="adminlte/img/102.png" class="img-thumbnail template-img" alt=""
+                                        data-value="50x50" data-toggle="modal" data-target="#new-project-temp">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="img-template">
+                                    <img src="adminlte/img/103.png" class="img-thumbnail template-img" alt=""
+                                        data-value="34x64" data-toggle="modal" data-target="#new-project-temp">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="img-template">
+                                    <img src="adminlte/img/104.png" class="img-thumbnail template-img" alt=""
+                                        data-value="76x25" data-toggle="modal" data-target="#new-project-temp">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <h3 class="mb-3">My Design</h3>
+                            <div class="card">
+                                <ul class="nav flex-column" id="design"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+
+    <!-- Modal from button plus -->
+    <div class="modal fade" id="new-project" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="mb-0">New Label</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 w-100">
+                        <label for="project-name" class="form-label">Label Name</label>
+                        <input class="form-control width-auto" id="project-name" autocomplete="off" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Template Size</label>
+                        <select class="form-control" id="template-size">
+                            <option selected value="">Choose a Size</option>
+                            <option value="5x34">5 x 34 mm</option>
+                            <option value="38x100">38 X 100 mm</option>
+                            <option value="50x100">50 X 100 mm</option>
+                            <option value="50x50">50 X 50 mm</option>
+                            <option value="76x25">76 X 25 mm</option>
+                            <option value="25x38">25 X 38 mm</option>
+                            <option value="19x50">19 X 50 mm</option>
+                            <option value="19x38">19 X 38 mm</option>
+                            <option value="13x38">13 X 38 mm</option>
+                        </select>
+                    </div>
+                    <hr class="my-2">
+                    <h5 class="mb-2 fw-semibold">Size</h5>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="mb-3 d-flex flex-column align-items-start">
+                                <label for="height" class="form-label">Height (mm)</label>
+                                <input type="number" min="5" class="form-control" id="height" placeholder="E.g 10"
+                                    autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3 d-flex flex-column align-items-start">
+                                <label for="width" class="form-label">Width (mm)</label>
+                                <input type="number" min="5" class="form-control" id="width" placeholder="E.g 10"
+                                    autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">CLOSE</button>
+                    <button type="button" class="btn btn-success" id="btn-create" disabled>CREATE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    //modal from image//
+
+    <div class="modal fade" id="new-project-temp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mb-0">New Label from pics</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 w-100">
+                        <label for="project-name-temp" class="form-label">Label Name</label>
+                        <input class="form-control width-auto" id="project-name-temp" autocomplete="off" type="text">
+                    </div>
+                    <input type="hidden" id="template-size-temp" value="">
+                    <hr class="my-2">
+                    <h5 class="mb-2 fw-semibold">this label Size you choose</h5>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="mb-3 d-flex flex-column align-items-start">
+                                <label for="height-temp" class="form-label">Height (mm)</label>
+                                <input type="text" class="form-control" id="height-temp" placeholder="E.g 10"
+                                    autocomplete="off" readonly>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3 d-flex flex-column align-items-start">
+                                <label for="width-temp" class="form-label">Width (mm)</label>
+                                <input type="text" class="form-control" id="width-temp" placeholder="E.g 10"
+                                    autocomplete="off" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">CLOSE</button>
+                    <button type="button" class="btn btn-success" id="btn-create-temp" disabled>CREATE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="adminlte/js/adminlte.min.js"></script>
+    <script>
+        var projectName = "";
+        var fileName = "";
+
+        $(document).on('keyup', '#project-name', function () {
+            projectName = $(this).val();
+            fileName = projectName.toLowerCase();
+            fileName = fileName.replace(/ /g, '_');
+            fileName = fileName + ".json";
+
+            var height = $(document).find('#height').val();
+            var width = $(document).find('#width').val();
+
+            if (height === '' || height === ' ' || height === '0' ||
+                width === '' || width === ' ' || width === '0' ||
+                projectName === '' || projectName === ' ' || projectName === '0'
+            ) {
+                $(document).find('#btn-create').attr('disabled', 'disabled');
+            } else {
+                $(document).find('#btn-create').removeAttr('disabled');
+            }
+        });
+
+        $(document).on('keyup', '#height', function () {
+            projectName = $(this).val();
+            fileName = projectName.toLowerCase();
+            fileName = fileName.replace(/ /g, '_');
+            fileName = fileName + ".json";
+
+            var height = $(document).find('#height').val();
+            var width = $(document).find('#width').val();
+
+            if (height === '' || height === ' ' || height === '0' ||
+                width === '' || width === ' ' || width === '0' ||
+                projectName === '' || projectName === ' ' || projectName === '0'
+            ) {
+                $(document).find('#btn-create').attr('disabled', 'disabled');
+            } else {
+                $(document).find('#btn-create').removeAttr('disabled');
+            }
+        });
+
+        $(document).on('keyup', '#width', function () {
+            projectName = $(this).val();
+            fileName = projectName.toLowerCase();
+            fileName = fileName.replace(/ /g, '_');
+            fileName = fileName + ".json";
+
+            var height = $(document).find('#height').val();
+            var width = $(document).find('#width').val();
+
+            if (height === '' || height === ' ' || height === '0' ||
+                width === '' || width === ' ' || width === '0' ||
+                projectName === '' || projectName === ' ' || projectName === '0'
+            ) {
+                $(document).find('#btn-create').attr('disabled', 'disabled');
+            } else {
+                $(document).find('#btn-create').removeAttr('disabled');
+            }
+        });
+
+        $(document).on('change', '#template-size', function () {
+            var size = $(this).val();
+            size = size.split('x');
+
+            if (size.length === 0) {
+                $(document).find('#height').val('');
+                $(document).find('#width').val('');
+            } else {
+                $(document).find('#height').val(size[0]);
+                $(document).find('#width').val(size[1]);
+            }
+
+            if (height === '' || height === ' ' || height === '0' ||
+                width === '' || width === ' ' || width === '0' ||
+                projectName === '' || projectName === ' ' || projectName === '0'
+            ) {
+                $(document).find('#btn-create').attr('disabled', 'disabled');
+            } else {
+                $(document).find('#btn-create').removeAttr('disabled');
+            }
+        });
+
+        $(document).on('click', '#btn-create', function () {
+            var height = $(document).find('#height').val();
+            var width = $(document).find('#width').val();
+
+            var data = [{
+                "file": {
+                    "project": projectName,
+                    "name": fileName,
+                    "height": height,
+                    "width": width
+                },
+                "label": []
+            }];
+
+            var settings = {
+                "url": "http://localhost:3000/label_create",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify(data),
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+
+                if (response.type === 1) {
+                    window.location.replace('editor/' + fileName);
+                }
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('.template-img').click(function () {
+                var dataValue = $(this).data('value');
+                var size = dataValue.split('x');
+                var height = size[0];
+                var width = size[1];
+
+                $('#height-temp').val(height);
+                $('#width-temp').val(width);
+                updateCreateButtonState();
+            });
+            $('#project-name-temp').on('input', function () {
+                updateCreateButtonState();
+            });
+
+
+            $('#new-project-temp').on('shown.bs.modal', function () {
+                updateCreateButtonState();
+            });
+            function updateCreateButtonState() {
+                var projectName = $('#project-name-temp').val();
+                var height = $('#height-temp').val();
+                var width = $('#width-temp').val();
+                if (projectName && height && width) {
+                    $('#btn-create-temp').prop('disabled', false);
+                } else {
+                    $('#btn-create-temp').prop('disabled', true);
+                }
+            }
+            $(document).on('click', '#btn-create-temp', function () {
+                var projectName = $('#project-name-temp').val();
+                var height = $('#height-temp').val();
+                var width = $('#width-temp').val();
+
+                var fileName = projectName.toLowerCase().replace(/ /g, '_') + ".json";
+
+                var data = [{
+                    "file": {
+                        "project": projectName,
+                        "name": fileName,
+                        "height": height,
+                        "width": width
+                    },
+                    "label": []
+                }];
+
+                var settings = {
+                    "url": "http://localhost:3000/label_create",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify(data),
+                };
+
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+
+                    if (response.type === 1) {
+                        window.location.replace('editor/' + fileName);
+                    }
+                });
+            });
+        });
+
+        $(document).on('click', '.delete-project', function (event) {
+            event.preventDefault();
+
+            var projectName = $(this).data('project');
+
+            var deleteConfirmed = confirm('Are you sure want to delete ' + projectName + ' ?');
+
+
+            if (deleteConfirmed) {
+                var settings = {
+                    "url": "http://localhost:3000/delete_project",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify({ "projectName": projectName }),
+                };
+
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+
+                    if (response.type === 1) {
+                        window.location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                });
+            }
+        });
+
+
+        $.ajax({
+            url: 'http://localhost:3000/projects',
+            method: 'GET',
+            success: function (response) {
+                $(document).find('#design').empty();
+
+                if (response.length !== 0) {
+                    var i = 0;
+                    for (i = 0; i < response.length; i++) {
+                        $(document).find('#design').append(`<li class="nav-item">
+                                                <a href="editor/` + response[i].file.name + `" class="nav-link text-dark">
+                                                    `+ response[i].file.project + ` <span class="float-right">
+                                                    <i class="fa fa-play text-success play-project"></i> 
+                                                    <span style="margin-left: 5px;"></span> <!-- Elemen HTML kosong untuk memberikan jarak -->
+                                                    <i class="fa fa-trash text-danger delete-project" data-project="` + response[i].file.name + `"></i></span>
+                                                </a>
+                                            </li>`);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

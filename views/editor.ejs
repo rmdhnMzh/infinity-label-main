@@ -1,0 +1,903 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * 'unsafe-inline';style-src * 'unsafe-inline';script-src * 'unsafe-inline' 'unsafe-eval';img-src 'self' data: 'unsafe-inline';font-src * 'unsafe-inline' 'unsafe-eval' data:;connect-src 'self';frame-src 'self';media-src 'self';">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+
+    <title>Infinity Label</title>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../fontaswome/css/all.min.css">
+    <script src="../konva.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="modal" data-target="#"
+                        title="back to menu"><i class=" fa fa-home"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="modal"
+                        data-target="#new-text" title="Add Text"><i class=" fa fa-font"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="modal"
+                        data-target="#new-qr" title="Add QR"><i class="fa fa-qrcode"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" role="button" id="btn-excel-load"
+                        title="Load Excel"><i class="fa fa-table"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" role="button" id="btn-print" title="Print"><i
+                            class="fa fa-print"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" role="button" id="btn-save-png"
+                        title="Download PNG"><i class="fa fa-download"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="javascript:void(0)" role="button" id="btn-delete-component"
+                        title="Delete component"><i class="fa-solid fa-trash"></i></a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a class="brand-link" href="/">
+                <img src="..\adminlte\img\LOGO infinity label designer 300.png" alt="Etterlogo" class="brand-image"
+                    style="opacity: .8">
+                <span class="brand-text font-weight-light">Infinity Label</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- SidebarSearch Form -->
+                <!-- <div class="form-inline mt-2">
+                    <div class="input-group" data-widget="sidebar-search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sidebar">
+                                <i class="fas fa-search fa-fw"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false" id="component-list"></ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <section class="content" id="content">
+                <div id="canvas"></div>
+            </section>
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+
+    <div class="modal fade" id="new-text" tabindex="-1" aria-labelledby="new-text" aria-hidden="true">
+        <div class="modal-dialog" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="mb-0">New Text</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 w-100">
+                        <label for="component-name" class="form-label">Component Name</label>
+                        <input class="form-control width-auto" id="component-name" autocomplete="off" type="text">
+                    </div>
+                    <div class="mb-3 w-100">
+                        <label for="component-text" class="form-label">Display Value</label>
+                        <input class="form-control width-auto" id="component-text" autocomplete="off" type="text">
+                    </div>
+                    <div class="mb-3 w-100">
+                        <label for="component-attribute" class="form-label">Data Attribute</label>
+                        <input class="form-control width-auto" id="component-attribute" autocomplete="off" type="text">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">CLOSE</button>
+                    <button type="button" class="btn btn-success" id="btn-add-text" data-dismiss="modal"
+                        disabled>ADD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="new-qr" tabindex="-1" aria-labelledby="new-qr" aria-hidden="true">
+        <div class="modal-dialog" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="mb-0">New QR</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 w-100">
+                        <label for="qr-component-name" class="form-label">Component Name</label>
+                        <input class="form-control width-auto" id="qr-component-name" autocomplete="off" type="text">
+                    </div>
+                    <div class="mb-3 w-100">
+                        <label for="qr-component-text" class="form-label">Display Value</label>
+                        <input class="form-control width-auto" id="qr-component-text" autocomplete="off" type="text">
+                    </div>
+                    <div class="mb-3 w-100">
+                        <label for="qr-component-attribute" class="form-label">Data Attribute</label>
+                        <input class="form-c    ontrol width-auto" id="qr-component-attribute" autocomplete="off"
+                            type="text">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">CLOSE</button>
+                    <button type="button" class="btn btn-success" id="btn-add-qr" data-dismiss="modal"
+                        disabled>ADD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../adminlte/js/adminlte.min.js"></script>
+
+    <script>
+        // HTML Decoder
+        function htmlDecode(input) {
+            const doc = new DOMParser().parseFromString(input, "text/html");
+            return doc.documentElement.textContent;
+        }
+
+        // Layout configuration from file read expressjs
+        var design_string = "<%= design %>";
+
+        var decodedDesign = htmlDecode(design_string);
+        var design = JSON.parse(decodedDesign.slice(1, -1));
+        var width = Number(design[0].file.width);
+        var height = Number(design[0].file.height);
+
+        var width_section = $(document).find('#content').width() - 10;
+
+        let stage = new Konva.Stage({
+            container: 'canvas',
+            width: width_section,
+            height: window.innerHeight - 100,
+        });
+
+        let layer = new Konva.Layer();
+
+        stage.add(layer);
+
+        let centerX = stage.width() / 2;
+        let centerY = stage.height() / 2;
+
+
+
+
+        if (width && height) {
+            var Label = new Konva.Rect({
+                x: centerX - (parseFloat(width) * 3.7795275591),
+                y: centerY - (parseFloat(height) * 3.7795275591),
+                width: parseFloat(width) * 3.7795275591, //konversi mm ke px
+                height: parseFloat(height) * 3.7795275591,
+                fill: 'white',
+                stroke: 'lightgray',
+                strokeWidth: 1,
+                name: 'base_layout'
+            });
+
+            layer.add(Label);
+            layer.draw();
+        }
+
+        // Mouse Cursor
+        layer.on('mouseover', function (evt) {
+            document.body.style.cursor = 'pointer';
+        });
+
+        layer.on('mouseout', function (evt) {
+            document.body.style.cursor = 'default';
+        });
+
+        // Transformer
+        var transformer = new Konva.Transformer();
+        layer.add(transformer);
+
+        // Transformer Attach Shape
+        var selectedShape = null;
+        layer.on('click tap', function (evt) {
+            transformer.detach();
+
+            if (evt.target.attrs.name !== "base_layout") {
+                selectedShape = evt.target;
+                layer.add(transformer);
+                transformer.attachTo(selectedShape).rotateEnabled(false);
+                $('#btn-delete-component').removeClass('disabled');
+            } else {
+                selectedShape = null;
+                $('#btn-delete-component').addClass('disabled');
+            }
+
+            layer.draw();
+        });
+
+        if (design[0].label.length != 0) {
+            for (var i = 0; i < design[0].label.length; i++) {
+                if (design[0].label[i].type === "text") {
+                    var text = new Konva.Text({
+                        x: design[0].label[i].x,
+                        y: design[0].label[i].y,
+                        text: design[0].label[i].text,
+                        fontSize: design[0].label[i].fontSize,
+                        draggable: true,
+                        name: design[0].label[i].name,
+                        type: "text"
+                    });
+
+                    layer.add(text);
+                    layer.draw();
+                }
+
+                if (design[0].label[i].type === "qr") {
+                    var x = design[0].label[i].x;
+                    var y = design[0].label[i].y;
+                    var height = Number(design[0].label[i].height);
+                    var width = Number(design[0].label[i].width);
+                    var name = design[0].label[i].name;
+
+                    var imageObj = new Image();
+                    imageObj.onload = function () {
+                        var qr = new Konva.Image({
+                            x: x,
+                            y: y,
+                            image: imageObj,
+                            width: width,
+                            height: height,
+                            draggable: true,
+                            name: name,
+                            type: "qr"
+                        });
+
+                        layer.add(qr);
+                        layer.draw();
+                    };
+                    imageObj.src = design[0].label[i].text;
+                }
+
+                $(document).find('#component-list').append(`
+    <li class="nav-item" id="component-${design[0].label[i].name}">
+        <a href="javascript:void(0)" class="nav-link">
+            <i class="nav-icon fa fa-circle"></i>
+            <p>${design[0].label[i].name}</p>
+        </a>
+    </li>
+`);
+
+            }
+            layer.draw();
+        }
+
+        var component_name = "";
+        var component_text = "";
+        var component_attribute = "";
+
+        $(document).on('keyup', '#component-name', function () {
+            component_name = $(this).val();
+            component_name = component_name.toLowerCase();
+            component_name = component_name.replace(/ /g, '_');
+
+            $(this).val(component_name);
+
+            component_text = $(document).find('#component-text').val();
+            component_attribute = $(document).find('#component-attribute').val();
+
+            if (component_name === "" || component_name === " " ||
+                component_text === "" || component_text === " " ||
+                component_attribute === "" || component_attribute === "") {
+                $(document).find('#btn-add-text').attr('disabled', 'disabled');
+            } else {
+                $(document).find('#btn-add-text').removeAttr('disabled');
+            }
+        });
+
+        $(document).on('keyup', '#component-text', function () {
+            component_text = $(this).val();
+
+            component_name = $(document).find('#component-name').val();
+            component_attribute = $(document).find('#component-attribute').val();
+
+            if (component_name === "" || component_name === " " ||
+                component_text === "" || component_text === " " ||
+                component_attribute === "" || component_attribute === "") {
+                $(document).find('#btn-add-text').attr('disabled', 'disabled');
+            } else {
+                $(document).find('#btn-add-text').removeAttr('disabled');
+            }
+        });
+
+        $(document).on('keyup', '#component-attribute', function () {
+            component_attribute = $(this).val();
+
+            component_name = $(document).find('#component-name').val();
+            component_text = $(document).find('#component-text').val();
+
+            if (component_name === "" || component_name === " " ||
+                component_text === "" || component_text === " " ||
+                component_attribute === "" || component_attribute === "") {
+                $(document).find('#btn-add-text').attr('disabled', 'disabled');
+            } else {
+                $(document).find('#btn-add-text').removeAttr('disabled');
+            }
+        });
+
+        $(document).on('click', '#btn-add-text', function () {
+            component_text = $(document).find('#component-text').val();
+            component_attribute = $(document).find('#component-attribute').val();
+
+            var component = {
+                "name": component_name,
+                "text": component_text,
+                "attribute": component_attribute,
+                "type": "text",
+                "fontSize": 20,
+                "x": centerX,
+                "y": centerY
+            }
+
+            design[0].label.push(component);
+
+            var data = JSON.stringify(design);
+
+            var settings = {
+                "url": "http://localhost:3000/design_update",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "text/plain"
+                },
+                "data": data,
+            };
+
+            $.ajax(settings).done(function (response) {
+                window.location.reload();
+            });
+
+            var text = new Konva.Text({
+                x: centerX,
+                y: centerY,
+                text: component_text,
+                fontSize: 20,
+                draggable: true,
+                name: component_name
+            });
+
+            layer.add(text);
+            layer.draw();
+        });
+
+        var qr_component_name = "";
+        var qr_component_text = "";
+        var qr_component_attribute = "";
+
+        $(document).on('keyup', '#qr-component-name', function () {
+            qr_component_name = $(this).val();
+            qr_component_name = qr_component_name.toLowerCase();
+            qr_component_name = qr_component_name.replace(/ /g, '_');
+
+            $(this).val(qr_component_name);
+
+            qr_component_text = $(document).find('#qr-component-text').val();
+            qr_component_attribute = $(document).find('#qr-component-attribute').val();
+
+            if (qr_component_name === "" || qr_component_name === " " ||
+                qr_component_text === "" || qr_component_text === " " ||
+                qr_component_attribute === "" || qr_component_attribute === "") {
+                $(document).find('#btn-add-qr').attr('disabled', 'disabled');
+            } else {
+                $(document).find('#btn-add-qr').removeAttr('disabled');
+            }
+        });
+
+        $(document).on('keyup', '#qr-component-text', function () {
+            qr_component_text = $(this).val();
+
+            qr_component_name = $(document).find('#qr-component-name').val();
+            qr_component_attribute = $(document).find('#qr-component-attribute').val();
+
+            if (qr_component_name === "" || qr_component_name === " " ||
+                qr_component_text === "" || qr_component_text === " " ||
+                qr_component_attribute === "" || qr_component_attribute === "") {
+                $(document).find('#btn-add-qr').attr('disabled', 'disabled');
+            } else {
+                $(document).find('#btn-add-qr').removeAttr('disabled');
+            }
+        });
+
+        $(document).on('keyup', '#qr-component-attribute', function () {
+            qr_component_attribute = $(this).val();
+
+            qr_component_name = $(document).find('#qr-component-name').val();
+            qr_component_text = $(document).find('#qr-component-text').val();
+
+            if (qr_component_name === "" || qr_component_name === " " ||
+                qr_component_text === "" || qr_component_text === " " ||
+                qr_component_attribute === "" || qr_component_attribute === "") {
+                $(document).find('#btn-add-qr').attr('disabled', 'disabled');
+            } else {
+                $(document).find('#btn-add-qr').removeAttr('disabled');
+            }
+        });
+
+        $(document).on('click', '#btn-add-qr', function () {
+            qr_component_text = $(document).find('#qr-component-text').val();
+            qr_component_attribute = $(document).find('#qr-component-attribute').val();
+
+            var component = {
+                "name": qr_component_name,
+                "text": qr_component_text,
+                "attribute": qr_component_attribute,
+                "type": "qr",
+                "x": centerX,
+                "y": centerY,
+                "width": 100,
+                "height": 100
+            }
+
+            var data = JSON.stringify(component);
+
+            var settings = {
+                "url": "http://localhost:3000/qrgen",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "text/plain"
+                },
+                "data": data,
+            };
+
+            $.ajax(settings).done(function (response) {
+                var component_insert = {
+                    "name": qr_component_name,
+                    "text": response,
+                    "attribute": qr_component_attribute,
+                    "type": "qr",
+                    "x": centerX,
+                    "y": centerY,
+                    "width": 100,
+                    "height": 100
+                }
+
+                design[0].label.push(component_insert);
+
+                var data = JSON.stringify(design);
+
+                var settings = {
+                    "url": "http://localhost:3000/design_update",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Content-Type": "text/plain"
+                    },
+                    "data": data,
+                };
+
+                $.ajax(settings).done(function (response) {
+                    // Do Nothing
+                });
+
+                var imageObj = new Image();
+                imageObj.onload = function () {
+                    var qr = new Konva.Image({
+                        x: centerX,
+                        y: centerY,
+                        image: imageObj,
+                        width: 100,
+                        height: 100,
+                    });
+
+                    layer.add(qr);
+                };
+                imageObj.src = response;
+            });
+        });
+
+        var objects = null;
+
+        setTimeout(function () {
+            objects = layer.children;
+
+            objects.forEach(function (obj) {
+                obj.on('dragmove', function () {
+                    var containerPosition = obj.getAbsolutePosition();
+                    var stageBox = stage.container().getBoundingClientRect();
+
+                    var areaPosition = {
+                        x: containerPosition.x,
+                        y: containerPosition.y,
+                    };
+
+                    for (let i = 0; i < design[0].label.length; i++) {
+                        if (design[0].label[i].name === obj.attrs.name) {
+                            design[0].label[i].x = areaPosition.x;
+                            design[0].label[i].y = areaPosition.y;
+                            break; // Stop once the label is found and updated
+                        }
+                    }
+
+                    var data = JSON.stringify(design);
+
+                    var settings = {
+                        "url": "http://localhost:3000/design_update",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "text/plain"
+                        },
+                        "data": data,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        console.log(response);
+                    });
+                });
+
+                obj.on('transform', function () {
+                    var containerPosition = obj.getAbsolutePosition();
+                    var stageBox = stage.container().getBoundingClientRect();
+
+                    var areaPosition = {
+                        x: containerPosition.x,
+                        y: containerPosition.y,
+                    };
+
+                    var width_new = obj.width() * (obj.scaleX());
+                    var height_new = obj.height() * (obj.scaleY());
+
+                    if (obj.attrs.type === "text") {
+                        var scaleX = obj.scaleX();
+                        var scaleY = obj.scaleY();
+                        var originalFontSize = obj.fontSize();
+                        var scaledFontSize = originalFontSize * Math.max(scaleX, scaleY);
+
+                        for (let i = 0; i < design[0].label.length; i++) {
+                            if (design[0].label[i].name === obj.attrs.name) {
+                                design[0].label[i].fontSize = scaledFontSize;
+                                break; // Stop once the label is found and updated
+                            }
+                        }
+                    }
+
+                    if (obj.attrs.type === "qr") {
+                        for (let i = 0; i < design[0].label.length; i++) {
+                            if (design[0].label[i].name === obj.attrs.name) {
+                                design[0].label[i].width = width_new.toFixed(0);
+                                design[0].label[i].height = height_new.toFixed(0);
+                                break; // Stop once the label is found and updated
+                            }
+                        }
+                    }
+
+                    var data = JSON.stringify(design);
+
+                    var settings = {
+                        "url": "http://localhost:3000/design_update",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "text/plain"
+                        },
+                        "data": data,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        console.log(response);
+                    });
+                });
+            });
+        }, 3000);
+
+        var label_merge = [];
+
+        function updateTemplateWithInput(inputData, template) {
+            // Create a new object based on the template to avoid mutating the original template
+            let updatedTemplate = { ...template };
+
+            // Check if the attribute in the template exists in the input data
+            if (inputData.hasOwnProperty(updatedTemplate.attribute)) {
+                // Update the text field in the template with the value from the input data
+                updatedTemplate.text = inputData[updatedTemplate.attribute];
+            }
+
+            return updatedTemplate;
+        }
+
+        $(document).on('click', '#btn-excel-load', function () {
+            const excelFile = document.createElement('input');
+            excelFile.type = 'file';
+            excelFile.accept = '.xlsx';
+            excelFile.style.display = 'none';
+
+            excelFile.click();
+
+            excelFile.addEventListener('change', function (event) {
+                label_merge = [];
+
+                const file = event.target.files[0];
+
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const arrayBuffer = e.target.result;
+                    // Read Excel
+                    const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+
+                    // First worksheet
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+
+                    // Sheet to JSON
+                    const data = XLSX.utils.sheet_to_json(worksheet);
+
+                    // Merge data to label component
+                    for (var i = 0; i < data.length; i++) {
+                        var label_merge_prep = [];
+                        for (var j = 0; j < design[0].label.length; j++) {
+                            const updatedTemplate = updateTemplateWithInput(data[i], design[0].label[j]);
+                            label_merge_prep.push(updatedTemplate);
+                        }
+                        label_merge.push(label_merge_prep);
+                    }
+
+                    // Get QR Code
+                    for (var k = 0; k < label_merge.length; k++) {
+                        for (var l = 0; l < label_merge[k].length; l++) {
+                            if (label_merge[k][l].type === "qr") {
+                                var iter_k = k;
+                                var before_generate = label_merge[k][l];
+                                var to_generate = JSON.stringify(label_merge[k][l]);
+
+                                var settings = {
+                                    "url": "http://localhost:3000/qrgen",
+                                    "method": "POST",
+                                    "timeout": 0,
+                                    "headers": {
+                                        "Content-Type": "text/plain"
+                                    },
+                                    "data": to_generate,
+                                    "async": false
+                                };
+
+                                var qr = "";
+                                $.ajax(settings).done(function (response) {
+                                    qr = response;
+                                });
+
+                                label_merge[k][l].text = qr;
+                            }
+                        }
+                    }
+                };
+
+                reader.readAsArrayBuffer(file);
+            });
+        });
+
+        $(document).on('click', '#btn-print', function () {
+            var width_section = $(document).find('#content').width() - 10;
+
+            if (label_merge.length === 0) {
+                alert('Choose Excel Data Before Print!');
+            } else {
+                for (var i = 0; i < label_merge.length; i++) {
+                    layer.clear();
+
+                    var design = JSON.parse(decodedDesign.slice(1, -1));
+                    var width = Number(design[0].file.width);
+                    var height = Number(design[0].file.height);
+
+                    let centerX = stage.width() / 2;
+                    let centerY = stage.height() / 2;
+
+                    var Label = new Konva.Rect({
+                        x: centerX - (parseFloat(width) * 3.7795275591),
+                        y: centerY - (parseFloat(height) * 3.7795275591),
+                        width: parseFloat(width) * 3.7795275591, //konversi mm ke px
+                        height: parseFloat(height) * 3.7795275591,
+                        fill: 'white',
+                        stroke: 'lightgray',
+                        strokeWidth: 1,
+                        name: 'base_layout'
+                    });
+
+                    layer.add(Label);
+                    layer.draw();
+
+                    for (var j = 0; j < label_merge[i].length; j++) {
+                        if (label_merge[i][j].type === "text") {
+                            var text = new Konva.Text({
+                                x: label_merge[i][j].x,
+                                y: label_merge[i][j].y,
+                                text: label_merge[i][j].text,
+                                fontSize: label_merge[i][j].fontSize,
+                                draggable: false,
+                                name: label_merge[i][j].name,
+                                type: "text"
+                            });
+
+                            layer.add(text);
+                        }
+
+                        if (label_merge[i][j].type === "qr") {
+                            var x = label_merge[i][j].x;
+                            var y = label_merge[i][j].y;
+                            var height = Number(label_merge[i][j].height);
+                            var width = Number(label_merge[i][j].width);
+                            var name = label_merge[i][j].name;
+
+                            var imageObj = new Image();
+                            imageObj.onload = function () {
+                                var qr = new Konva.Image({
+                                    x: x,
+                                    y: y,
+                                    image: imageObj,
+                                    width: width,
+                                    height: height,
+                                    draggable: true,
+                                    name: name,
+                                    type: "qr"
+                                });
+
+                                layer.add(qr);
+                            };
+                            imageObj.src = label_merge[i][j].text;
+                        }
+                    }
+                }
+            }
+        });
+
+        $(document).on('click', '#btn-save-png', function () {
+            var width = Number(design[0].file.width);
+            var height = Number(design[0].file.height);
+
+            let centerX = stage.width() / 2;
+            let centerY = stage.height() / 2;
+
+            let dataURL = layer.toDataURL({
+                x: centerX - (parseFloat(width) * 3.7795275591),
+                y: centerY - (parseFloat(height) * 3.7795275591),
+                width: parseFloat(width) * 3.7795275591,
+                height: parseFloat(height) * 3.7795275591
+            });
+
+            var settings = {
+                "url": "http://localhost:3000/savepng",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "text/plain"
+                },
+                "data": dataURL
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+        });
+
+        $(document).on('click', '#btn-delete-component', function (event) {
+            event.preventDefault();
+
+            if (!selectedShape) {
+                alert('Please select a component to delete');
+                return;
+            }
+
+            var componentName = selectedShape.name();
+            var deleteConfirmed = confirm('Are you sure want to delete ' + componentName + ' ?');
+            var fileName = design[0].file.name;
+
+            if (deleteConfirmed) {
+                var shape = stage.findOne('.' + componentName);
+                if (shape) {
+                    if (design && design.length > 0) {
+                        for (var i = 0; i < design[0].label.length; i++) {
+                            if (design[0].label[i].name === componentName) {
+                                design[0].label.splice(i, 1);
+                                console.log(componentName + ' has been deleted successfully!');
+                                break;
+                            }
+                        }
+                    }
+
+                    // Hapus komponen grafis
+                    shape.destroy();
+                    transformer.detach();
+                    layer.draw();
+                    selectedShape = null;
+
+                    // Kirim permintaan untuk memperbarui desain di server
+                    var data = JSON.stringify(design);
+
+                    var settings = {
+                        "url": "http://localhost:3000/design_update",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "text/plain"
+                        },
+                        "data": data,
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        if (response.type === 1) {
+                            console.log('Design updated successfully on server.');
+                        } else {
+                            console.error('Failed to update design on server: ' + response.message);
+                        }
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        console.error('AJAX request to update design failed: ' + textStatus, errorThrown);
+                    });
+                }
+            }
+        });
+
+        $(document).on('click', '.fa-home', function () {
+            var confirmQuit = confirm("Are you sure you want to quit this file?");
+            if (confirmQuit) {
+                // Mengarahkan pengguna langsung ke halaman utama
+                window.location.replace('/');
+            }
+        });
+    </script>
+</body>
+
+</html>
